@@ -1,0 +1,9 @@
+.profile__vocation {
+    color: rgba(255, 255, 255, 1);
+    font-size: 18px;
+    line-height: 21.78px;
+    margin: 16px 0 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
