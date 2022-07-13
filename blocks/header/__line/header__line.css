@@ -5,3 +5,9 @@
     background-color: rgba(84, 84, 84, 1); 
     height: 1px;
 }
+
+@media screen and (max-width: 575px) {
+    .header__line {
+        margin-top: 31.6px;
+        }
+}

@@ -2,5 +2,11 @@
     padding-top: 36.25px;
     display: flex;
     align-items: center;
-    height: 127.5px;
+}
+
+@media screen and (max-width: 767px) {
+    .profile {
+        padding-top: 38.25px;
+        flex-direction: column;
+        }
 }
