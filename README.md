@@ -1,4 +1,4 @@
-# Место ([mesto]())
+# Место ([mesto](https://edwardzhr.github.io/mesto/))
 
 Учебный проект по основам JavaScript.
 
