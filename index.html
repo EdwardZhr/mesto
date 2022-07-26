@@ -20,52 +20,9 @@
                     <p class="profile__vocation">Исследователь океана</p>
                     <button class="profile__edit-btn"></button>
                 </div>
-                <button class="profile__add-btn">
-                </button>
+                <button class="profile__add-btn"></button>
             </section>
             <section class="elements">
-                <div class="element">
-                    <img src="images/pic1.png" alt="Карачаевск" class="element__picture">
-                    <div class="element__wrapper">
-                        <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="images/pic2.png" alt="Гора Эльбрус" class="element__picture">
-                    <div class="element__wrapper">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="images/pic3.png" alt="Домбай" class="element__picture">
-                    <div class="element__wrapper">  
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="images/pic2.png" alt="Гора Эльбрус" class="element__picture">
-                    <div class="element__wrapper">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="images/pic3.png" alt="Домбай" class="element__picture">
-                    <div class="element__wrapper">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="images/pic1.png" alt="Карачаево-Черкесия" class="element__picture">
-                    <div class="element__wrapper">
-                        <h2 class="element__title">Карачаево-Черкесия</h2>
-                        <button class="element__like"></button>
-                    </div>
-                </div>
             </section>
         </main>
         <footer class="footer">
@@ -75,14 +32,41 @@
         </footer>
         <div class="popup">
             <form action="#" class="popup__container">
+                <button class="popup__close-btn"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <input type="text" value="Жак-Ив Кусто" placeholder="Укажите имя" class="popup__input popup__input_type_name">
                 <input type="text" value="Исследователь океана" placeholder="Укажите профессию" class="popup__input popup__input_type_vocation">
                 <button class="popup__save-btn">Сохранить</button>
+            </form>
+        </div>
+        <div class="popup">
+            <form action="#" class="popup__container popup__container_add">
                 <button class="popup__close-btn"></button>
+                <h3 class="popup__title">Новое место</h3>
+                <input type="text" placeholder="Новое место" class="popup__input popup__input_type_location-name">
+                <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link">
+                <button class="popup__save-btn">Создать</button>
+            </form>
+        </div>
+        <div class="popup">
+            <form action="#" class="popup__container popup__container_place_photo">
+                <button class="popup__close-btn popup__close-btn_place_photo"></button>
+                <img src="#" alt="#" class="popup__img">
+                <p class="popup__image-name"></p>
             </form>
         </div>
     </div>
+    <template class="element-template">
+        <div class="element">
+            <img src="#" alt="#" class="element__picture">
+            <div class="element__mask"></div>
+            <button class="element__delete"></button>
+            <div class="element__wrapper">
+                <h2 class="element__title"></h2>
+                <button class="element__like"></button>
+            </div>
+        </div>
+    </template>
     <script src="scripts/script.js"></script>
 </body>
 </html>

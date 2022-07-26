@@ -4,9 +4,9 @@
     height: 32px;
     cursor: pointer;
     border: none;
-    position: absolute;
     margin: -74px 0 0 400px;
     padding: 0;
+    position: absolute;
 }
 
 .popup__close-btn:hover {
