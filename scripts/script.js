@@ -103,19 +103,21 @@ function addCard(element) {
 }
 
 function handleCardFormSubmit  (evt) {
-  let card = {
+  const card = {
     name: locationName.value,
     link: photoLink.value
   }
   addCard(card);
   closePopup(evt.target.closest('.popup'));
   evt.target.reset();
+  evt.preventDefault();
 }
 
 function handleProfileFormSubmit (evt) {
   name.textContent = `${nameInput.value}`;
   vocation.textContent = `${vocationInput.value}`;
   closePopup(evt.target.closest('.popup'));
+  evt.preventDefault();
 }
 
 initialCards.forEach(addCard)
@@ -125,8 +127,7 @@ addButton.addEventListener('click', openCardPopup);
 Array.from(closeButtons).forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    closePopup(popup)
+    closePopup(popup);
   });
 });
 
