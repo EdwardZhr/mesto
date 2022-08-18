@@ -31,6 +31,7 @@
             </p>
         </footer>
         <div class="popup profile-popup">
+
             <form action="#" class="popup__container popup__container_type_profile" novalidate>
                 <fieldset class="popup__set">
                     <button class="popup__close-btn"></button>
@@ -45,10 +46,12 @@
                     </label>
                     <button class="popup__save-btn">Сохранить</button>
                 </fieldset>
+
             </form>
         </div>
         <div class="popup card-popup">
             <form action="#" class="popup__container popup__container_type_add">
+
                 <fieldset class="popup__set">
                     <button class="popup__close-btn"></button>
                     <h3 class="popup__title">Новое место</h3>
@@ -62,14 +65,15 @@
                     </label>
                     <button class="popup__save-btn">Создать</button>
                 </fieldset>
+
             </form>
         </div>
         <div class="popup image-popup">
-            <form action="#" class="popup__container popup__container_type_photo">
-                <button class="popup__close-btn popup__close-btn_type_photo"></button>
+            <div class="popup__container popup__container_type_photo">
+                <button type="button" class="popup__close-btn popup__close-btn_type_photo"></button>
                 <img src="#" alt="#" class="popup__img">
                 <p class="popup__image-name"></p>
-            </form>
+            </div>
         </div>
     </div>
     <template class="element-template">
