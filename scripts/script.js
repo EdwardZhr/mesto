@@ -2,7 +2,7 @@ const popups = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.profile-popup');
 const cardPopup = document.querySelector('.card-popup');
 const imagePopup = document.querySelector('.image-popup');
-const popupForms = document.querySelector('.popup__container');
+const popupForms = document.querySelectorAll('.popup__container');
 const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
 const closeButtons = document.querySelectorAll('.popup__close-btn');
@@ -57,8 +57,16 @@ function deleteCard (evt) {
 }
 
 function openPopup (item) {
-  item.classList.add('popup_opened')
+  item.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscUp);
 }
+
+const handleEscUp = (evt) => {
+  const activePopup = document.querySelector('.popup_opened');
+  if (evt.which === 27) {
+    closePopup(activePopup);
+  };
+};
 
 function openProfilePopup (evt) {
   openPopup(profilePopup);
@@ -77,8 +85,23 @@ function openImagePopup (evt) {
   popupImgName.textContent = evt.target.previousElementSibling.alt;
 };
 
+function hideError (popup) {
+  const inputErrors = Array.from(popup.querySelectorAll('.popup__input-error'));
+  const fields = Array.from(popup.querySelectorAll('.popup__input'));
+  const btn = popup.querySelector('.popup__save-btn_inactive')
+  inputErrors.forEach((error)=> {
+    error.textContent = ''
+  })
+  fields.forEach((field)=> {
+    field.classList.remove('popup__input_type_error');
+  })
+  btn.classList.remove('popup__save-btn_inactive');
+}
+
 function closePopup (popup) {
+  document.removeEventListener('keydown', handleEscUp); 
   popup.classList.remove('popup_opened');
+  hideError (popup);
 }
 
 function createCard(item) {
@@ -122,15 +145,15 @@ initialCards.forEach(addCard)
 
 editButton.addEventListener('click', openProfilePopup);
 addButton.addEventListener('click', openCardPopup);
-Array.from(closeButtons).forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    closePopup(popup)
-  });
-});
+
+Array.from(popups).forEach((form) => {
+  form.addEventListener('click', (evt)=> {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
+      evt.preventDefault();
+      closePopup(form);
+      }
+  })
+}) 
 
 profileContainer.addEventListener('submit', handleProfileFormSubmit);
 cardContainer.addEventListener('submit', handleCardFormSubmit);
-
-
