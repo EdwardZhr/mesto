@@ -62,20 +62,28 @@ function openPopup (item) {
 }
 
 const handleEscUp = (evt) => {
-  const activePopup = document.querySelector('.popup_opened');
-  if (evt.which === 27) {
+  if (evt.key === "Escape") {
+    const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   };
 };
+
+function blockSubmit (popup) {
+  const btn = popup.querySelector('.popup__save-btn')
+  btn.classList.add('popup__save-btn_inactive');
+  btn.setAttribute("disabled", "disabled");
+}
 
 function openProfilePopup (evt) {
   openPopup(profilePopup);
   nameInput.value = name.textContent;
   vocationInput.value = vocation.textContent;
+  hideError (profilePopup);
 };
 
 function openCardPopup (evt) {
   openPopup(cardPopup);
+  blockSubmit(cardPopup);
 };
 
 function openImagePopup (evt) {
@@ -88,7 +96,7 @@ function openImagePopup (evt) {
 function hideError (popup) {
   const inputErrors = Array.from(popup.querySelectorAll('.popup__input-error'));
   const fields = Array.from(popup.querySelectorAll('.popup__input'));
-  const btn = popup.querySelector('.popup__save-btn_inactive')
+  const btn = popup.querySelector('.popup__save-btn')
   inputErrors.forEach((error)=> {
     error.textContent = ''
   })
@@ -101,7 +109,6 @@ function hideError (popup) {
 function closePopup (popup) {
   document.removeEventListener('keydown', handleEscUp); 
   popup.classList.remove('popup_opened');
-  hideError (popup);
 }
 
 function createCard(item) {

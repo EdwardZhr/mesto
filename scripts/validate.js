@@ -30,10 +30,11 @@ const hideInputError = (formElement, inputElement, data) => {
   const toggleButtonState = (inputList, buttonElement, data) => {
     const params = Object.assign({}, data);
     if (hasInvalidInput(inputList)) {
-      console.log(buttonElement);
       buttonElement.classList.add(`${params.inactiveButtonClass}`);
+      buttonElement.setAttribute("disabled", "disabled");
     } else {
       buttonElement.classList.remove(`${params.inactiveButtonClass}`);
+      buttonElement.removeAttribute("disabled", "disabled");
     }
   }
   
@@ -41,7 +42,7 @@ const hideInputError = (formElement, inputElement, data) => {
     const params = Object.assign({}, data);
     const inputList = Array.from(formElement.querySelectorAll(`${params.inputSelector}`));
     const buttonElement = formElement.querySelector(`${params.submitButtonSelector}`);
-  
+    
     toggleButtonState(inputList, buttonElement, params);
   
     inputList.forEach((inputElement) => {
