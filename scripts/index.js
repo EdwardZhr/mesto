@@ -1,33 +1,7 @@
 
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
-
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
+import {initialCards, data} from './Data.js'
 
 const popups = document.querySelectorAll('.popup');
 const elements = document.querySelector('.elements');
@@ -43,6 +17,9 @@ const profileContainer = document.querySelector('.popup__container_type_profile'
 const cardContainer = document.querySelector('.popup__container_type_add');
 const locationName = document.querySelector('.popup__input_type_location-name');
 const photoLink = document.querySelector('.popup__input_type_link');
+const imagePopup = document.querySelector('.image-popup');
+const popupImg = document.querySelector('.popup__img');
+const popupImgName = document.querySelector('.popup__image-name');
 
 const handleEscUp = (evt) => {
   if (evt.key === "Escape") {
@@ -60,14 +37,8 @@ function openProfilePopup (evt) {
   openPopup(profilePopup);
   nameInput.value = name.textContent;
   vocationInput.value = vocation.textContent;
-  hideError (profilePopup);
-};
 
-function blockSubmit (popup) {
-  const btn = popup.querySelector('.popup__save-btn')
-  btn.classList.add('popup__save-btn_inactive');
-  btn.setAttribute("disabled", "disabled");
-}
+};
 
 function openCardPopup (evt) {
   openPopup(cardPopup);
@@ -81,17 +52,6 @@ function closePopup (popup) {
   popup.classList.remove('popup_opened');
 }
 
-function hideError (popup) {
-  const inputErrors = Array.from(popup.querySelectorAll('.popup__input-error'));
-  const fields = Array.from(popup.querySelectorAll('.popup__input'));
-  inputErrors.forEach((error)=> {
-    error.textContent = ''
-  })
-  fields.forEach((field)=> {
-    field.classList.remove('popup__input_type_error');
-  })
-}
-
 function handleProfileFormSubmit (evt) {
   name.textContent = `${nameInput.value}`;
   vocation.textContent = `${vocationInput.value}`;
@@ -99,9 +59,14 @@ function handleProfileFormSubmit (evt) {
   evt.preventDefault();
 }
 
-function addCard(element) {
-  const card = new Card(element, '.element-template');
+function generateCard(element) {
+  const card = new Card(element, '.element__picture', '.element-template');
   const cardElement = card.generateCard();
+  return cardElement
+}
+
+function addCard(element) {
+  const cardElement = generateCard(element);
   elements.prepend(cardElement);
 }
 
@@ -114,7 +79,6 @@ function handleCardFormSubmit  (evt) {
   closePopup(evt.target.closest('.popup'));
   evt.target.reset();
   evt.preventDefault();
-  blockSubmit(cardPopup);
 }
 
 Array.from(popups).forEach((popup) => {
@@ -130,19 +94,11 @@ initialCards.forEach(addCard);
 profileContainer.addEventListener('submit', handleProfileFormSubmit);
 cardContainer.addEventListener('submit', handleCardFormSubmit);
 
-const data = {
-  formSelector: '.popup__container_form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-btn',
-  inactiveButtonClass: 'popup__save-btn_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error'
-}
-
 const profileFormValidator = new FormValidator(data, '.popup__container_type_profile')
 
 const addFormValidator = new FormValidator(data, '.popup__container_type_add')
 
-profileFormValidator.enableValidation(data, '.popup__container_type_profile'); 
-addFormValidator.enableValidation(data, '.popup__container_type_add'); 
+profileFormValidator.enableValidation(); 
+addFormValidator.enableValidation(); 
 
+export { imagePopup, popupImg, popupImgName, openPopup}

@@ -1,11 +1,10 @@
-const imagePopup = document.querySelector('.image-popup');
-const popupImg = document.querySelector('.popup__img');
-const popupImgName = document.querySelector('.popup__image-name');
+import { imagePopup, popupImg, popupImgName, openPopup} from './index.js'
 
 export default class Card {
-    constructor(data, templateSelector) {
+    constructor(data, cardPicture, templateSelector) {
         this._name = data.name;
         this._link = data.link;
+        this._picture = cardPicture;
         this._templateSelector = templateSelector;
     }
 
@@ -16,7 +15,7 @@ export default class Card {
           .querySelector('.element')
           .cloneNode(true);
         
-        return cardElement;
+        return cardElement
       }
     
     _like (evt) {
@@ -25,25 +24,14 @@ export default class Card {
 
     _deleteCard() {
         this._element.remove();
+        this._element = null
     }
     
-    _handleEscUp = (evt) => {
-        if (evt.key === "Escape") {
-          const activePopup = document.querySelector('.popup_opened');
-          this._handleClosePopup(activePopup);
-        };
-    };
-
     _handleOpenPopup() {
-        imagePopup.classList.add('popup_opened');
         popupImg.src = this._link;
         popupImg.alt = this._name;
         popupImgName.textContent = this._name;
-        document.addEventListener('keydown', this._handleEscUp);
-      }
-    
-    _handleClosePopup() {
-        imagePopup.classList.remove('popup_opened');
+        openPopup(imagePopup);
       }
 
     _setEventListeners() {
@@ -68,8 +56,8 @@ export default class Card {
         this._element = this._getTemplate();
         this._setEventListeners();
 
-        this._element.querySelector('.element__picture').src = this._link;
-        this._element.querySelector('.element__picture').alt = this._name;
+        this._element.querySelector(this._picture).src = this._link;
+        this._element.querySelector(this._picture).alt = this._name;
         this._element.querySelector('.element__title').textContent = this._name;
     
         return this._element;
