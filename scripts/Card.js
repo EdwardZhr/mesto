@@ -4,7 +4,7 @@ export default class Card {
     constructor(data, cardPicture, templateSelector) {
         this._name = data.name;
         this._link = data.link;
-        this._picture = cardPicture;
+        this._pictureSelector = cardPicture;
         this._templateSelector = templateSelector;
     }
 
@@ -54,10 +54,10 @@ export default class Card {
 
     generateCard() {
         this._element = this._getTemplate();
+        this._picture = this._element.querySelector(this._pictureSelector);
         this._setEventListeners();
-
-        this._element.querySelector(this._picture).src = this._link;
-        this._element.querySelector(this._picture).alt = this._name;
+        this._picture.src = this._link;
+        this._picture.alt = this._name;
         this._element.querySelector('.element__title').textContent = this._name;
     
         return this._element;

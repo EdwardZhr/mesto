@@ -21,7 +21,7 @@ export default class FormValidator {
         errorElement.textContent = '';
     };
     
-    _blockSubmit = () => {
+    blockSubmit = () => {
       this._buttonElement.classList.add(`${this._inactiveButtonClass}`);
       this._buttonElement.setAttribute("disabled", "disabled");
     };
@@ -42,7 +42,7 @@ export default class FormValidator {
       
     _toggleButtonState = (inputList, buttonElement, data) => {
         if (this._hasInvalidInput(inputList)) {
-          this._blockSubmit();
+          this.blockSubmit();
         } else {
           buttonElement.classList.remove(`${data.inactiveButtonClass}`);
           buttonElement.removeAttribute("disabled", "disabled");
@@ -58,15 +58,16 @@ export default class FormValidator {
             this._toggleButtonState(this._inputList, this._buttonElement, data);
           });
         });
+        this._formElement.addEventListener('submit', (evt) => {
+          evt.preventDefault();
+        });
     };
 
     enableValidation = () => {
-      this._formElement.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-        if (this._formElementSelector === ".popup__container_type_add") {  
-          this._blockSubmit();
-        }
-      });
       this._setEventListeners(this._data);
   };
 }
+
+// if (this._formElementSelector === ".popup__container_type_add") {  
+//   this.blockSubmit();
+// }

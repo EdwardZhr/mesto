@@ -1,7 +1,7 @@
 
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
-import {initialCards, data} from './Data.js'
+import {initialCards, data} from './data.js'
 
 const popups = document.querySelectorAll('.popup');
 const elements = document.querySelector('.elements');
@@ -20,6 +20,11 @@ const photoLink = document.querySelector('.popup__input_type_link');
 const imagePopup = document.querySelector('.image-popup');
 const popupImg = document.querySelector('.popup__img');
 const popupImgName = document.querySelector('.popup__image-name');
+const profileFormValidator = new FormValidator(data, '.popup__container_type_profile')
+const addFormValidator = new FormValidator(data, '.popup__container_type_add')
+
+profileFormValidator.enableValidation(); 
+addFormValidator.enableValidation();
 
 const handleEscUp = (evt) => {
   if (evt.key === "Escape") {
@@ -37,11 +42,11 @@ function openProfilePopup (evt) {
   openPopup(profilePopup);
   nameInput.value = name.textContent;
   vocationInput.value = vocation.textContent;
-
 };
 
 function openCardPopup (evt) {
   openPopup(cardPopup);
+  addFormValidator.blockSubmit();
 };
 
 editButton.addEventListener('click', openProfilePopup);
@@ -53,8 +58,8 @@ function closePopup (popup) {
 }
 
 function handleProfileFormSubmit (evt) {
-  name.textContent = `${nameInput.value}`;
-  vocation.textContent = `${vocationInput.value}`;
+  name.textContent = nameInput.value;
+  vocation.textContent = vocationInput.value;
   closePopup(evt.target.closest('.popup'));
   evt.preventDefault();
 }
@@ -94,11 +99,6 @@ initialCards.forEach(addCard);
 profileContainer.addEventListener('submit', handleProfileFormSubmit);
 cardContainer.addEventListener('submit', handleCardFormSubmit);
 
-const profileFormValidator = new FormValidator(data, '.popup__container_type_profile')
-
-const addFormValidator = new FormValidator(data, '.popup__container_type_add')
-
-profileFormValidator.enableValidation(); 
-addFormValidator.enableValidation(); 
+ 
 
 export { imagePopup, popupImg, popupImgName, openPopup}
