@@ -67,7 +67,3 @@ export default class FormValidator {
       this._setEventListeners(this._data);
   };
 }
-
-// if (this._formElementSelector === ".popup__container_type_add") {  
-//   this.blockSubmit();
-// }

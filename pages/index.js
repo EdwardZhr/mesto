@@ -1,9 +1,13 @@
 
-import Card from './Card.js'
-import FormValidator from './FormValidator.js'
-import {initialCards, data} from './data.js'
+import Section from '../components/Section.js';
+import Card from '../components/Card.js'
+import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js'
+import FormValidator from '../components/FormValidator.js'
+import {initialCards, data} from '../utils/data.js'
 
 const popups = document.querySelectorAll('.popup');
+const cardsContainer = '.elements';
 const elements = document.querySelector('.elements');
 const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
@@ -20,11 +24,32 @@ const photoLink = document.querySelector('.popup__input_type_link');
 const imagePopup = document.querySelector('.image-popup');
 const popupImg = document.querySelector('.popup__img');
 const popupImgName = document.querySelector('.popup__image-name');
-const profileFormValidator = new FormValidator(data, '.popup__container_type_profile')
-const addFormValidator = new FormValidator(data, '.popup__container_type_add')
 
-profileFormValidator.enableValidation(); 
+const profileFormValidator = new FormValidator(data, '.popup__container_type_profile')
+profileFormValidator.enableValidation()
+
+const addFormValidator = new FormValidator(data, '.popup__container_type_add')
 addFormValidator.enableValidation();
+
+const popupWidthImage = new PopupWithImage('.image-popup')
+popupWidthImage.setEventListeners();
+
+const handleCardClick = function(name, link) {
+  popupWidthImage.open(name, link)
+}
+
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '.element__picture', '.element-template', handleCardClick);
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement);
+    },
+  },
+  cardsContainer
+)
+
+cardsList.renderItems();
 
 const handleEscUp = (evt) => {
   if (evt.key === "Escape") {
@@ -89,13 +114,23 @@ function handleCardFormSubmit  (evt) {
 Array.from(popups).forEach((popup) => {
   popup.addEventListener('mousedown', (evt)=> {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
+      
       evt.preventDefault();
       closePopup(popup);
       }
   })
 }) 
 
-initialCards.forEach(addCard);
+// function test() {
+//   const pop = new Popup('.image-popup')
+//   console.log(pop);
+
+// }
+
+// test();
+
+
+
 profileContainer.addEventListener('submit', handleProfileFormSubmit);
 cardContainer.addEventListener('submit', handleCardFormSubmit);
 

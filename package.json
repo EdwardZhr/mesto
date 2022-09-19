@@ -1,0 +1,19 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "Учебный проект по основам JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdwardZhr/mesto.git"
+  },
+  "author": "Edward Zhrebec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdwardZhr/mesto/issues"
+  },
+  "homepage": "https://github.com/EdwardZhr/mesto#readme"
+}
