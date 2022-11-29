@@ -32,6 +32,6 @@ const initialCards = [
     inactiveButtonClass: 'popup__save-btn_inactive',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input-error',
-  }
+  };
 
-  export {initialCards, data}
+  export {initialCards, data};

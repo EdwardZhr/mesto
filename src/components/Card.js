@@ -1,5 +1,3 @@
-import { imagePopup, popupImg, popupImgName, openPopup} from '../pages/index.js'
-
 export default class Card {
     constructor(data, cardPicture, templateSelector, handleCardClick) {
         this._name = data.name;
@@ -16,7 +14,7 @@ export default class Card {
           .querySelector('.element')
           .cloneNode(true);
         
-        return cardElement
+        return cardElement;
       }
     
     _like (evt) {
@@ -25,7 +23,7 @@ export default class Card {
 
     _deleteCard() {
         this._element.remove();
-        this._element = null
+        this._element = null;
     }
 
     _setEventListeners() {
@@ -43,7 +41,7 @@ export default class Card {
 
         photo.addEventListener('click', () => {
             this._handleCardClick(this._name, this._link);
-        })
+        });
       }
 
     generateCard() {

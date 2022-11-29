@@ -3,10 +3,11 @@ export default class Popup {
         this._popup = document.querySelector(selector);
     }
 
+    // Логика закрытия попапа клавишей Esc.
     _handleEscClose(evt) {
-        if (evt.key === "Escape") {
+        if (evt.key === 'Escape') {
             this.close();
-          };
+          }
     }
 
     open() {
@@ -19,14 +20,15 @@ export default class Popup {
         this._popup.classList.remove('popup_opened');
       }
 
+    //   Добавление слушателя клика иконке закрытия попапа
     setEventListeners() {
         this._popup.addEventListener('mousedown', (evt)=> {
             if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
               evt.preventDefault();
               this.close();
               }
-          })
+          });
     }
-};
+}
 
-
+// Класс отвечает за открытие и закрытие попапа
