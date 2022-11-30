@@ -1,6 +1,7 @@
 export default class Popup {
     constructor(selector) {
         this._popup = document.querySelector(selector);
+        this._handleEscClose = this._handleEscClose.bind(this);
     }
 
     // Логика закрытия попапа клавишей Esc.
@@ -12,11 +13,11 @@ export default class Popup {
 
     open() {
         this._popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscClose.bind(this));
+        document.addEventListener('keydown', this._handleEscClose);
     }
 
     close() {
-        document.removeEventListener('keydown', this._handleEscClose.bind(this)); 
+        document.removeEventListener('keydown', this._handleEscClose); 
         this._popup.classList.remove('popup_opened');
       }
 

@@ -1,12 +1,12 @@
 
-import Section from './components/Section.js';
-import Card from './components/Card.js';
-import UserInfo from './components/UserInfo.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import FormValidator from './components/FormValidator.js';
-import {initialCards, data} from './utils/data.js';
-import './pages/index.css';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import FormValidator from '../components/FormValidator.js';
+import {initialCards, data} from '../utils/data.js';
+import '../pages/index.css';
 
 const cardsContainer = '.elements';
 const editButton = document.querySelector('.profile__edit-btn');
@@ -49,18 +49,23 @@ popupWithProfileForm.setEventListeners();
 // Функция открытия попапа с формой профиля
 const handleProfileClick = function() {
   const infoData = userInfo.getUserInfo();
-  nameInput.value = infoData.name;
-  vocationInput.value = infoData.vocation;
+  popupWithProfileForm.setInputValues(infoData);
   popupWithProfileForm.open();
 };
 
 // Слушатель открытия формы профиля
 editButton.addEventListener('click', handleProfileClick);
 
-// // Функция сабмита формы добавления карточки
-const handleCardFormSubmit = function(formData) {
+// Создание карточки
+const createCard = function(formData) {
   const card = new Card(formData, '.element__picture', '.element-template', handleCardClick);
   const cardElement = card.generateCard();
+  return cardElement;
+};
+
+// // Функция сабмита формы добавления карточки и ее добавление
+const handleCardFormSubmit = function(formData) {
+  const cardElement = createCard(formData);
   cardsList.addItem(cardElement);
   popupWithCardForm.close();
 };
@@ -68,6 +73,7 @@ const handleCardFormSubmit = function(formData) {
 // // Функция открытия попапа с формой добавления карточки
 const handleCardFormClick = function() {
   popupWithCardForm.open();
+  addFormValidator.blockSubmit();
 };
 
 // // Создание попапа с формой добавления карточки
