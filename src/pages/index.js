@@ -86,8 +86,7 @@ addButton.addEventListener('click', handleCardFormClick);
 const cardsList = new Section({
   items: initialCards,
   renderer: (data) => {
-    const card = new Card(data, '.element__picture', '.element-template', handleCardClick);
-    const cardElement = card.generateCard();
+    const cardElement = createCard(data); 
     cardsList.addItem(cardElement);
     },
   },
