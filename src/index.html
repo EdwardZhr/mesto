@@ -13,7 +13,9 @@
         </header>
         <main class="content">
             <section class="profile">
-                <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+                    <div class="profile__avatar-wrapper">                        
+                    <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+                    </div>
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <p class="profile__vocation">Исследователь океана</p>
@@ -40,8 +42,23 @@
                         <span class="popup__input-error name-input-error"></span>
                     </label>
                     <label class="popup__field">
-                        <input type="text" name="vocation"  value="Исследователь океана" placeholder="Укажите профессию" class="popup__input popup__input_type_vocation" id="vocation-input" required minlength="2" maxlength="200">
+                        <input type="text" name="about"  value="Исследователь океана" placeholder="Укажите профессию" class="popup__input popup__input_type_vocation" id="vocation-input" required minlength="2" maxlength="200">
                         <span class="popup__input-error vocation-input-error"></span>
+                    </label>
+                    <button class="popup__save-btn">Сохранить</button>
+                </fieldset>
+
+            </form>
+        </div>
+        <div class="popup avatar-popup">
+
+            <form action="#" class="popup__container popup__container_form popup__container_type_avatar" novalidate>
+                <fieldset class="popup__set">
+                    <button class="popup__close-btn" type="button"></button>
+                    <h3 class="popup__title">Обновить аватар</h3>
+                    <label class="popup__field">
+                        <input type="text" name="avatar" value="" placeholder="" class="popup__input popup__input_type_avatar" id="avatar-input" required minlength="2">
+                        <span class="popup__input-error name-input-error"></span>
                     </label>
                     <button class="popup__save-btn">Сохранить</button>
                 </fieldset>
@@ -63,7 +80,19 @@
                         <input type="url" name="link" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" id="link-input" required>
                         <span class="popup__input-error link-input-error"></span>
                     </label>
-                    <button class="popup__save-btn">Создать</button>
+                    <button class="popup__save-btn popup__save-btn_create">Создать</button>
+                </fieldset>
+
+            </form>
+        </div>
+        <div class="popup delete-popup">
+
+            <form action="#" class="popup__container popup__container_form popup__container_type_add">
+
+                <fieldset class="popup__set">
+                    <button class="popup__close-btn" type="button"></button>
+                    <h3 class="popup__title">Вы уверены?</h3>
+                    <button class="popup__save-btn popup__save-btn_delete">Да</button>
                 </fieldset>
 
             </form>
@@ -85,7 +114,10 @@
             <button class="element__delete"></button>
             <div class="element__wrapper">
                 <h2 class="element__title"></h2>
-                <button class="element__like"></button>
+                <div class="element_like-wrapper">
+                    <button class="element__like"></button>
+                    <div class="element__like-count"></div>
+                </div>
             </div>
         </div>
     </template>
