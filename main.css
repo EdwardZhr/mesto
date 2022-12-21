@@ -22,6 +22,7 @@
 .element__like{align-self:center;background:url(87ed371465c7a6a1cd01.svg) 50% no-repeat;border:none;height:19px;padding:0;width:23px}.element__like:hover{cursor:pointer;opacity:.5}
 .element__like_active{background:url(fe17a515669479b1e649.svg) 50% no-repeat}
 .element__delete{align-self:center;background:url(ce3b64935accf9b8212e.svg) 50% no-repeat;border:none;height:19px;padding:0;position:absolute;right:20px;top:20px;width:18px}.element__delete:hover{cursor:pointer;opacity:.5}
+.element__delete_display-none{display:none}
 .element__like-count{font-size:13px;line-height:15.73px;text-align:center}
 .footer{padding:67px 0 60px}@media screen and (max-width:575px){.footer{margin-left:15px;padding:48px 0 36px}}
 .footer__copyright{color:#545454;font-size:18px;line-height:21.78px;margin:0}@media screen and (max-width:575px){.footer__copyright{font-size:14px;line-height:16.94px}}
