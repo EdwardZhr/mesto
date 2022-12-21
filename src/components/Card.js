@@ -61,8 +61,8 @@ export default class Card {
       
     setLikes(likes) {
         this._likes = likes;
-        const likeCount = this._element.querySelector('.element__like-count');
-        likeCount.textContent = this._likes.length;
+        this._likeCount = this._element.querySelector('.element__like-count');
+        this._likeCount.textContent = this._likes.length;
         if (this.isLiked()) {
             this._like();
         } else {
@@ -72,7 +72,8 @@ export default class Card {
 
     generateCard() {
         this._element = this._getTemplate();
-        this._picture = this._element.querySelector(this._pictureSelector);
+        this._picture = this._element.querySelector(this._pictureSelector);       
+        this._likeCount = this._element.querySelector('.element__like-count');
         this._setEventListeners();
         this._picture.src = this._link;
         this._picture.alt = this._name;
@@ -81,7 +82,7 @@ export default class Card {
         this.setLikes(this._likes);
 
         if (this._userId !== this._ownerId) {
-            this._trashIcon.style.display = 'none';
+            this._trashIcon.classList.add('element__delete_display-none');
         }
 
         return this._element;
