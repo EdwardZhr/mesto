@@ -200,8 +200,6 @@ const popupWithAvatarForm = new PopupWithForm('.avatar-popup', handleAvatarFormS
 popupWithAvatarForm .setEventListeners();
 
 const handleAvatarFormClick = function() {
-  const infoData = userInfo.getUserInfo();
-  popupWithAvatarForm.setInputValues(infoData);
   popupWithAvatarForm.open();
 };
 
