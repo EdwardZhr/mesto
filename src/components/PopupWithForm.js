@@ -25,6 +25,9 @@ export default class PopupWithForm extends Popup {
     close() {
         super.close();
         this._formElement.reset();
+      }
+
+    rename() {
         this._btn.textContent = this._btnText;
       }
 

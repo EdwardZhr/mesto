@@ -5,6 +5,7 @@ import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
+import PopupWithConfirmator from '../components/PopupWithConfirmator.js';
 import {data} from '../utils/data.js';
 import '../pages/index.css';
 import Api from '../components/Api.js';
@@ -35,10 +36,7 @@ Promise.all([
     api.getInitialCards()
 
 ])
-  .then((values)=>{ 
-    const profileData =  values[0];
-    const initialCards = values[1];
-
+  .then(([profileData, initialCards])=>{ 
     userInfo.setUserInfo(profileData);
 
     userId = profileData._id;
@@ -81,12 +79,13 @@ const handleProfileFormSubmit = function(formData) {
   api.editProfile(formData)
   .then((res) => {
     userInfo.setUserInfo(res);
+    popupWithProfileForm.close();
   })
   .catch((err)=> {
     console.log(err);
   })
   .finally(()=>{    
-    popupWithProfileForm.close();
+    popupWithProfileForm.rename();
   });
 };
 
@@ -110,7 +109,7 @@ const createCard = function(formData) {
     (id) => {
       popupDelete.open();
 
-      popupDelete.handleFormSubmit = () => {
+      popupDelete.submitHandler(() => {
         api.deleteCard(id)
         .then((res)=>{
           card.deleteCard();
@@ -119,7 +118,7 @@ const createCard = function(formData) {
         .catch((err)=>{
           console.log(err);
         });
-      };
+      });
     }, 
 
     (id) => {
@@ -156,12 +155,13 @@ const handleCardFormSubmit = function(formData) {
       userId: userId
     });
     cardsList.addItem(cardElement);
+    popupWithCardForm.close();
   })
   .catch((err)=> {
     console.log(err);
   })
   .finally(()=>{
-    popupWithCardForm.close();
+    popupWithCardForm.rename();
   });
 };
 
@@ -178,7 +178,7 @@ popupWithCardForm .setEventListeners();
 // // Слушатель открытия формы добавления карточки
 addButton.addEventListener('click', handleCardFormClick);
 
-const popupDelete = new PopupWithForm('.delete-popup'); 
+const popupDelete = new PopupWithConfirmator('.delete-popup'); 
 popupDelete.setEventListeners();
 
 const handleAvatarFormSubmit = function(formData) {
@@ -186,12 +186,13 @@ const handleAvatarFormSubmit = function(formData) {
   api.changeAvatar(formData.avatar)
     .then((res)=>{
       userInfo.setUserInfo(res);
+      popupWithAvatarForm.close();
     })
     .catch((err)=>{
       console.log(err);
     })
     .finally(()=>{
-      popupWithAvatarForm.close();
+      popupWithAvatarForm.rename();
     });
 };
 

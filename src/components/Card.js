@@ -61,7 +61,6 @@ export default class Card {
       
     setLikes(likes) {
         this._likes = likes;
-        this._likeCount = this._element.querySelector('.element__like-count');
         this._likeCount.textContent = this._likes.length;
         if (this.isLiked()) {
             this._like();
